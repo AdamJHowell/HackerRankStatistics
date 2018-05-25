@@ -4,33 +4,6 @@ package com.adamjhowell.hackerrankstatistics;
 import java.util.*;
 
 
-/**
- * Created by Adam Howell on 2018-05-24.
- * Objective
- * In this challenge, we practice calculating the mean, median, and mode. Check out the Tutorial tab for learning materials and an instructional video!
- * <p>
- * Task
- * Given an array, inputArray, of N integers, calculate and print the respective mean, median, and mode on separate lines.
- * If your array contains more than one modal value, choose the numerically smallest one.
- * <p>
- * Note: Other than the modal value (which will always be an integer), your answers should be in decimal form, rounded to a scale of 1 decimal place.
- * <p>
- * Input Format
- * <p>
- * The first line contains an integer, N, denoting the number of elements in the array.
- * The second line contains N space-separated integers describing the array's elements.
- * <p>
- * Constraints
- * 10 < N < 2500
- * 0 < xᵢ <= 10⁵, where xᵢ is the iᵀᴴ element of the array.
- * Output Format
- * <p>
- * Print 3 lines of output in the following order:
- * <p>
- * Print the mean on a new line, to a scale of 1 decimal place.
- * Print the median on a new line, to a scale of 1 decimal place.
- * Print the mode on a new line; if more than one such value exists, print the numerically smallest one.
- */
 class Day0
 {
 	private double mean;
@@ -90,14 +63,26 @@ class Day0
 				modeMap.put( num, 1 );
 			}
 		}
-		// ToDo: Find the key(s) with the largest value.
-		return 1;
-	}
+		// Add the entrySet() from modeMap to list.
+		List<Map.Entry<Integer, Integer>> list = new ArrayList<>( modeMap.entrySet() );
 
+		// Sort list by values.
+		list.sort( Map.Entry.comparingByValue() );
 
-	@Override public String toString()
-	{
-		return mean + "\n" + median + "\n" + mode;
+		// Determine the maximum value (count).
+		Integer maxVal = list.get( list.size() - 1 ).getValue();
+
+		// modeList will hold all keys whose value matches maxVal.
+		List<Integer> modeList = new ArrayList<>();
+		for( Map.Entry pair : list )
+		{
+			if( pair.getValue() == maxVal )
+			{
+				modeList.add( ( Integer )pair.getKey() );
+			}
+		}
+		Collections.sort( modeList );
+		return modeList.get( 0 );
 	}
 
 
