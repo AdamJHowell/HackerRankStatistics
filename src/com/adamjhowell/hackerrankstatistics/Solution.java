@@ -4,6 +4,9 @@ package com.adamjhowell.hackerrankstatistics;
 import java.util.*;
 
 
+/**
+ * https://www.hackerrank.com/challenges/java-loops/problem
+ */
 public class Solution
 {
 
@@ -18,10 +21,13 @@ public class Solution
 		Integer[] intArray = new Integer[arraySize];
 
 		// Loop arraySize times to capture all integers into the array.
-		for( int i = 0; i < arraySize; i++ )
+		List<Integer> integerList = new ArrayList<>();
+		while( numScanner.hasNext() )
 		{
-			intArray[i] = numScanner.nextInt();
+			integerList.add( numScanner.nextInt() );
 		}
+		integerList.toArray( intArray );
+
 		System.out.println( calculateMean( intArray ) );
 		System.out.println( calculateMedian( intArray ) );
 		System.out.println( calculateMode( intArray ) );
