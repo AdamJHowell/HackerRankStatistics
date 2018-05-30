@@ -20,7 +20,7 @@ public class Solution
 		// Loop arraySize times to capture all integers into the array.
 		for( int i = 0; i < arraySize; i++ )
 		{
-			intArray[i] = Integer.parseInt( numScanner.next() );
+			intArray[i] = numScanner.nextInt();
 		}
 		System.out.println( calculateMean( intArray ) );
 		System.out.println( calculateMedian( intArray ) );
