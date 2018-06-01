@@ -5,9 +5,10 @@ import java.util.*;
 
 
 /**
+ * https://www.hackerrank.com/domains/tutorials/10-days-of-statistics
  * https://www.hackerrank.com/challenges/java-loops/problem
  */
-public class Day0
+public class Day0Part1
 {
 	@SuppressWarnings( "squid:S106" )
 	public static void main( String[] args )
