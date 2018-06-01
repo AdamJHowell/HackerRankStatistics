@@ -22,11 +22,13 @@ public class Solution
 
 		// Loop arraySize times to capture all integers into the array.
 		List<Integer> integerList = new ArrayList<>();
-		while( numScanner.hasNext() )
+		for( int i = 0; i < arraySize; i++ )
 		{
-			integerList.add( numScanner.nextInt() );
+			if( numScanner.hasNextInt() )
+				integerList.add( numScanner.nextInt() );
 		}
 		integerList.toArray( intArray );
+//		System.out.println( intArray.length );
 
 		System.out.println( calculateMean( intArray ) );
 		System.out.println( calculateMedian( intArray ) );
