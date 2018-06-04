@@ -5,9 +5,9 @@ import java.util.*;
 
 
 /**
- * The HackerRank Java compiler does not seem to allow ArrayLists for some data manipulations.
  * https://www.hackerrank.com/domains/tutorials/10-days-of-statistics
  * https://www.hackerrank.com/challenges/s10-quartiles/problem
+ * <p>
  * Sample input:
  * 9
  * 3 7 8 5 12 14 21 13 18
@@ -72,7 +72,6 @@ public class Solution
 		else
 		{
 			q2 = calculateMedianEven( tempList );
-
 		}
 		if( tempList.size() % 4 == 0 )
 		{
