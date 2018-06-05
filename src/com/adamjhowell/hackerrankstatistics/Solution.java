@@ -53,11 +53,20 @@ public class Solution
 
 	private static int[] calculateQuartiles( int[] numArray )
 	{
+		// Sort the array in non-descending order.
+		// Split the array in half.
+		// If the array has an odd number of elements, exclude the middle element from each half, q2 (median) is that middle element.
+		// If the array has an even number of elements, split the array evenly, q2 (median) is the mean of the two middle-most elements.
+		// For each half of the array, repeat the process above to get q1 and q3.
+		// q1 is the median for the lower half of the array.
+		// q3 is the median for the upper half of the array.
 		int q1;
 		int q2;
 		int q3;
 
 		List<Integer> tempList = new ArrayList<>();
+		List<Integer> lowerList = new ArrayList<>();
+		List<Integer> upperList = new ArrayList<>();
 		for( int num : numArray )
 		{
 			tempList.add( num );
@@ -68,24 +77,31 @@ public class Solution
 		if( tempList.size() % 2 == 1 )
 		{
 			q2 = calculateMedianOdd( tempList );
+			lowerList = tempList.subList( 0, chunkSize );
+			upperList = tempList.subList( chunkSize + 1, tempList.size() );
 		}
 		else
 		{
 			q2 = calculateMedianEven( tempList );
+			lowerList = tempList.subList( 0, chunkSize );
+			upperList = tempList.subList( chunkSize, tempList.size() );
 		}
-		if( tempList.size() % 4 == 0 )
+		for( Integer num : lowerList )
 		{
-			// The first value of subList is inclusive, and second value is exclusive.
-			q1 = calculateMedianEven( new ArrayList<>( tempList.subList( 0, chunkSize ) ) );
-			q3 = calculateMedianEven( new ArrayList<>( tempList.subList( chunkSize, tempList.size() ) ) );
+			System.out.println( "Lower: " + num );
 		}
+		for( Integer num : upperList )
+		{
+			System.out.println( "Upper: " + num );
+		}
+		if( lowerList.size() % 2 == 0 )
+			q1 = calculateMedianEven( lowerList );
 		else
-		{
-			// The first value of subList is inclusive, and second value is exclusive.
-			q1 = calculateMedianOdd( new ArrayList<>( tempList.subList( 0, chunkSize ) ) );
-			q3 = calculateMedianOdd( new ArrayList<>( tempList.subList( chunkSize + 1, tempList.size() ) ) );
-		}
-
+			q1 = calculateMedianOdd( lowerList );
+		if( upperList.size() % 2 == 0 )
+			q3 = calculateMedianEven( upperList );
+		else
+			q3 = calculateMedianOdd( upperList );
 		return new int[]{ q1, q2, q3 };
 	}
 
