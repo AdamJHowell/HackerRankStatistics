@@ -45,6 +45,7 @@ public class Day0Part2
 				integerList.add( numScanner.nextInt() );
 			}
 		}
+		numScanner.close();
 		// Load the ArrayList into an array.
 		integerList.toArray( weightArray );
 

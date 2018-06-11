@@ -26,6 +26,7 @@ public class Day0Part1
 			if( numScanner.hasNextInt() )
 				integerList.add( numScanner.nextInt() );
 		}
+		numScanner.close();
 		integerList.toArray( intArray );
 
 		System.out.println( calculateMean( intArray ) );

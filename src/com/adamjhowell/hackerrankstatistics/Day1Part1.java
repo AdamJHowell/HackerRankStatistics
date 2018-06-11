@@ -23,6 +23,7 @@ public class Day1Part1
 		{
 			intArray[i] = scan.nextInt();
 		}
+		scan.close();
 		// Calculate the weighted mean using the two arrays, and print the result with 1 decimal point.
 		System.out.printf( "%.1f%n", calculateStdev( intArray ) );
 	}

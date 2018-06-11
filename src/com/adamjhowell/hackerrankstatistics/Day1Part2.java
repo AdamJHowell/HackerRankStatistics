@@ -38,6 +38,7 @@ public class Day1Part2
 		{
 			intArray[i] = scan.nextInt();
 		}
+		scan.close();
 		// Calculate and print the three quartiles.
 		printQuartiles( intArray );
 	}

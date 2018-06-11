@@ -29,6 +29,7 @@ public class Day1Part3
 		{
 			quantityArray[i] = scan.nextInt();
 		}
+		scan.close();
 		// Extrapolate the numbers to a complete array.
 		// Each numArray[x] needs to have quantityArray[x] entries.
 		for( int i = 0; i < arraySize; i++ )
