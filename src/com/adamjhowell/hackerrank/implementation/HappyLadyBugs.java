@@ -1,4 +1,4 @@
-package com.adamjhowell.hackerrankstatistics;
+package com.adamjhowell.hackerrank.implementation;
 
 
 import java.util.*;
@@ -48,7 +48,7 @@ import java.util.stream.Collectors;
  * YES
  */
 
-public class Solution
+public class HappyLadyBugs
 {
 	@SuppressWarnings( "squid:S106" )
 	// Complete the happyLadybugs function below.

@@ -1,4 +1,4 @@
-package com.adamjhowell.hackerrankstatistics;
+package com.adamjhowell.hackerrank;
 
 
 import java.util.Scanner;

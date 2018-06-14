@@ -1,4 +1,4 @@
-package com.adamjhowell.hackerrankstatistics;
+package com.adamjhowell.hackerrank.warmup;
 
 
 import java.util.Arrays;

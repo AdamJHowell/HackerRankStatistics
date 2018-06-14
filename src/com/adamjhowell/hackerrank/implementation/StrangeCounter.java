@@ -1,8 +1,6 @@
-package com.adamjhowell.hackerrankstatistics;
+package com.adamjhowell.hackerrank.implementation;
 
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 
@@ -36,6 +34,11 @@ import java.util.Scanner;
  * Expected output:
  * 649267441662
  *
+ * Sample input:
+ * 999999997668
+ * Expected output:
+ * 649267443994
+ *
  * 3*1 = 3
  * 3*3 = 9
  * 3*7 = 21
@@ -67,17 +70,16 @@ public class StrangeCounter
 		long value = lastCycleStartCount;
 		long time = 1;
 
-		if( t > 1533 )
+		// "Fast forward" to the block before 't'.
+		while( time + lastCycleStartCount * 2 < t - lastCycleStartCount )
 		{
-			Map<Long, Long> endOfCycle = counterShortcut( t );
-			for( Map.Entry<Long, Long> entry : endOfCycle.entrySet() )
-			{
-				if( entry.getKey() < t && entry.getKey() > time )
-				{
-					time = entry.getKey();
-					value = entry.getValue();
-				}
-			}
+			// Get to the end of this block.
+			time = time + value - 1;
+
+			// Get to the start of the next block.
+			time++;
+			value = lastCycleStartCount * 2;
+			lastCycleStartCount = value;
 		}
 
 		while( time < t )
@@ -91,26 +93,6 @@ public class StrangeCounter
 			}
 		}
 		return value;
-	}
-
-
-	private static Map<Long, Long> counterShortcut( long startTime )
-	{
-		Map<Long, Long> endOfCycle = new LinkedHashMap<>();
-		// Start the cycle at time = 1533 and lastReset = 255.
-//		long time = 1533;
-//		long lastReset = 255;
-		long time = 1;
-		long lastReset = 3;
-		endOfCycle.put( time, lastReset );
-		while( time < startTime )
-		{
-			time = 3 * ( 2 * lastReset + 1 );
-			lastReset *= 2;
-			endOfCycle.put( time, lastReset );
-			System.out.println( "\tput time: " + time + ", lastRest: " + lastReset );
-		}
-		return endOfCycle;
 	}
 
 
