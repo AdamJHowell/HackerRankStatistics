@@ -23,6 +23,22 @@ import java.util.Scanner;
  * 4
  * Expected output:
  * 6
+ *
+ * Sample input:
+ * 1000
+ * Expected output:
+ * 534
+ *
+ * Sample input:
+ * 1000000000000
+ * Expected output:
+ * 649267441662
+ *
+ * 3*1 = 3
+ * 3*3 = 9
+ * 3*7 = 21
+ * 3*15 = 45
+ * 3*31 = 93
  */
 public class StrangeCounter
 {
@@ -32,24 +48,23 @@ public class StrangeCounter
 	{
 		if( t < 1 )
 		{
-			return t;
+			return 3;
 		}
 		// Counter always begins at 3.
-		int startNum = 3;
-		int curVal = startNum;
-		int timeSince = 0;
-		while( timeSince < t )
+		long lastReset = 3;
+		long value = lastReset;
+		long time = 1;
+		while( time < t )
 		{
-			curVal--;
-			timeSince++;
-			if( curVal == 1 )
+			value--;
+			time++;
+			if( value < 1 )
 			{
-				startNum *= 2;
-				curVal = startNum;
+				lastReset *= 2;
+				value = lastReset;
 			}
-			System.out.println( timeSince + " seconds have elapsed, and curVal is now " + curVal );
 		}
-		return curVal;
+		return value;
 	}
 
 
