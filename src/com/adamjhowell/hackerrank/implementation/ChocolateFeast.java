@@ -40,7 +40,18 @@ public class ChocolateFeast
 	// Complete the chocolateFeast function below.
 	private static int chocolateFeast( int n, int c, int m )
 	{
-		return n + c + m;
+		// n = money to spend
+		// c = cost of each chocolate
+		// m = wrappers needed to get one more chocolate.
+		int eaten = n / c;
+		int wrappers = eaten;
+		while( wrappers >= m )
+		{
+			eaten++;
+			wrappers++;
+			wrappers -= m;
+		}
+		return eaten;
 	}
 
 
