@@ -1,6 +1,8 @@
 package com.adamjhowell.hackerrankstatistics;
 
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -39,6 +41,7 @@ import java.util.Scanner;
  * 3*7 = 21
  * 3*15 = 45
  * 3*31 = 93
+ * (time at end of each cycle) = ( 3 * ( 2 * lastReset ) ) + 1
  */
 public class StrangeCounter
 {
@@ -46,25 +49,68 @@ public class StrangeCounter
 	@SuppressWarnings( "squid:S106" )
 	private static long strangeCounter( long t )
 	{
-		if( t < 1 )
+		if( t < 2 )
 		{
 			return 3;
 		}
-		// Counter always begins at 3.
-		long lastReset = 3;
-		long value = lastReset;
+		// (time at end of each cycle) = 3 * ( ( 2 * lastReset ) + 1 )  // The counter value at this point will always be 1.
+		// 1533 = 3 * ( 2 * 255 + 1 )
+		// t = 1533
+		// lastReset = 255
+		// count = 1
+
+		// Create a LinkedHashMap<Integer, Integer> of times and counts.  LinkedHashMap<time at end of cycle, lastCycleStartCount>
+		// Update lastCycleStartCount as that map is built.
+		// If the new time is greater than 't', do not store that new time, but instead start the counter from the most recent lastCycleStartCount.
+		// Counter initializes to 3.
+		long lastCycleStartCount = 3;
+		long value = lastCycleStartCount;
 		long time = 1;
+
+		if( t > 1533 )
+		{
+			Map<Long, Long> endOfCycle = counterShortcut( t );
+			for( Map.Entry<Long, Long> entry : endOfCycle.entrySet() )
+			{
+				if( entry.getKey() < t && entry.getKey() > time )
+				{
+					time = entry.getKey();
+					value = entry.getValue();
+				}
+			}
+		}
+
 		while( time < t )
 		{
 			value--;
 			time++;
 			if( value < 1 )
 			{
-				lastReset *= 2;
-				value = lastReset;
+				lastCycleStartCount *= 2;
+				value = lastCycleStartCount;
 			}
 		}
 		return value;
+	}
+
+
+	private static Map<Long, Long> counterShortcut( long startTime )
+	{
+		Map<Long, Long> endOfCycle = new LinkedHashMap<>();
+		// Start the cycle at time = 1533 and lastReset = 255.
+//		long time = 1533;
+//		long lastReset = 255;
+		long time = 1;
+		long lastReset = 3;
+		endOfCycle.put( time, lastReset );
+		while( time < startTime )
+		{
+			time = 3 * ( 2 * lastReset + 1 );
+			lastReset *= 2;
+			endOfCycle.put( time, lastReset );
+			System.out.println( "\tput time: " + time + ", lastRest: " + lastReset );
+		}
+		return endOfCycle;
 	}
 
 
