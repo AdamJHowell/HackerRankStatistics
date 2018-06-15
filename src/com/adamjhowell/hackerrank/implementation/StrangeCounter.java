@@ -82,6 +82,31 @@ public class StrangeCounter
 			lastCycleStartCount = value;
 		}
 
+		/*
+		To get the last time of the current block:
+	(end time of the current block) = time + value - 1
+	// The last value will always be 1.
+
+Get the next value after the end of the block:
+	time++;
+	value = lastReset * 2;
+	lastReset = value;
+
+
+
+// "Fast forward" to the block before 't'.
+while( time + lastReset * 2 < t - lastReset )
+{
+	// Get to the end of this block.
+	time = time + value - 1;
+	value = 1;
+
+	// Get to the start of the next block.
+	time++;
+	value = lastReset * 2;
+	lastReset = value;
+}
+		 */
 		while( time < t )
 		{
 			value--;
