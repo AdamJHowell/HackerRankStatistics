@@ -1,7 +1,7 @@
 package com.adamjhowell.hackerrank.statistics;
 
 
-import com.adamjhowell.hackerrank.UsefulMethods;
+import java.util.Scanner;
 
 
 /**
@@ -19,30 +19,36 @@ import com.adamjhowell.hackerrank.UsefulMethods;
  */
 public class Day4Part1
 {
-	public static void main( String[] args )
+	private static long factorial( long n )
 	{
-		double probMale = 1.09;
-		double probFemale = 1;
-		printBinomialDistribution( probMale, probFemale );
+		if( n == 0 )
+		{
+			return 1;
+		}
+		return n * factorial( n - 1 );
+	}
+
+
+	private static double combination( long n, long r )
+	{
+		return ( factorial( n ) / ( factorial( r ) * factorial( n - r ) ) );
 	}
 
 
 	@SuppressWarnings( "squid:S106" )
-	private static void printBinomialDistribution( double male, double female )
+	public static void main( String[] args )
 	{
-		System.out.printf( "%.3f", calculateBinomialDistribution( male, female ) );
-	}
-
-
-	private static double calculateBinomialDistribution( double male, double female )
-	{
-		double p = male / ( male + female );
+		Scanner scan = new Scanner( System.in );
+		double maleValue = scan.nextDouble();
+		double femaleValue = scan.nextDouble();
+		double p = ( maleValue ) / ( maleValue + femaleValue );
 		double q = 1 - p;
+
 		double prob = 0.0;
 		for( int i = 6; i >= 3; i-- )
 		{
-			prob += UsefulMethods.combination( 6, i ) * Math.pow( p, i ) * Math.pow( q, 6 - ( double )i );
+			prob += combination( 6, i ) * Math.pow( p, i ) * Math.pow( q, 6 - ( double )i );
 		}
-		return prob;
+		System.out.printf( "%.3f", prob );
 	}
 }
