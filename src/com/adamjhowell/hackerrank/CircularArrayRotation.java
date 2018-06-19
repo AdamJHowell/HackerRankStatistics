@@ -44,38 +44,6 @@ import java.util.Scanner;
 
 public class CircularArrayRotation
 {
-	// Complete the circularArrayRotation function below.
-	private static int[] circularArrayRotation( int[] a, int k, int[] queries )
-	{
-		int[] result = new int[queries.length];
-		for( int i = 0; i < k; i++ )
-		{
-			a = rightCircularRotation( a );
-		}
-		for( int i = 0; i < queries.length; i++ )
-		{
-			result[i] = a[queries[i]];
-		}
-		return result;
-	}
-
-
-	// This rotates "right" once.
-	private static int[] rightCircularRotation( int[] inArray )
-	{
-		int count = inArray.length;
-		int[] outArray = new int[count];
-		outArray[0] = inArray[count - 1];
-
-		while( count > 1 )
-		{
-			outArray[count - 1] = inArray[count - 2];
-			count--;
-		}
-		return outArray;
-	}
-
-
 	private static final Scanner scanner = new Scanner( System.in );
 
 
@@ -103,7 +71,6 @@ public class CircularArrayRotation
 		}
 
 		int mod = k % n;
-		int[] queries = new int[q];
 
 		for( int i = 0; i < q; i++ )
 		{
@@ -117,22 +84,7 @@ public class CircularArrayRotation
 			{
 				System.out.println( a[queriesItem - mod + a.length] );
 			}
-//			queries[i] = queriesItem;
 		}
-
-//		int[] result = circularArrayRotation( a, k, queries );
-//
-//		for( int i = 0; i < result.length; i++ )
-//		{
-//			System.out.print( result[i] );
-//
-//			if( i != result.length - 1 )
-//			{
-//				System.out.println();
-//			}
-//		}
-//		System.out.println();
-
 		scanner.close();
 	}
 }
