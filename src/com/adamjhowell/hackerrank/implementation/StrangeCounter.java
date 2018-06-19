@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 /**
  * Created by Adam Howell on 2018-06-13.
+ * https://www.hackerrank.com/challenges/strange-code/problem
  *
  * Bob has a strange counter. At the first second, it displays the number 3.
  * Each second, the number displayed by the counter decrements by 1 until it reaches 1.
@@ -52,72 +53,17 @@ public class StrangeCounter
 	@SuppressWarnings( "squid:S106" )
 	private static long strangeCounter( long t )
 	{
+		long count = 3;
 		if( t < 2 )
 		{
-			return 3;
+			return count;
 		}
-		// (time at end of each cycle) = 3 * ( ( 2 * lastReset ) + 1 )  // The counter value at this point will always be 1.
-		// 1533 = 3 * ( 2 * 255 + 1 )
-		// t = 1533
-		// lastReset = 255
-		// count = 1
-
-		// Create a LinkedHashMap<Integer, Integer> of times and counts.  LinkedHashMap<time at end of cycle, lastCycleStartCount>
-		// Update lastCycleStartCount as that map is built.
-		// If the new time is greater than 't', do not store that new time, but instead start the counter from the most recent lastCycleStartCount.
-		// Counter initializes to 3.
-		long lastCycleStartCount = 3;
-		long value = lastCycleStartCount;
-		long time = 1;
-
-		// "Fast forward" to the block before 't'.
-		while( time + lastCycleStartCount * 2 < t - lastCycleStartCount )
+		while( t > count )
 		{
-			// Get to the end of this block.
-			time = time + value - 1;
-
-			// Get to the start of the next block.
-			time++;
-			value = lastCycleStartCount * 2;
-			lastCycleStartCount = value;
+			t -= count;
+			count *= 2;
 		}
-
-		/*
-		To get the last time of the current block:
-	(end time of the current block) = time + value - 1
-	// The last value will always be 1.
-
-Get the next value after the end of the block:
-	time++;
-	value = lastReset * 2;
-	lastReset = value;
-
-
-
-// "Fast forward" to the block before 't'.
-while( time + lastReset * 2 < t - lastReset )
-{
-	// Get to the end of this block.
-	time = time + value - 1;
-	value = 1;
-
-	// Get to the start of the next block.
-	time++;
-	value = lastReset * 2;
-	lastReset = value;
-}
-		 */
-		while( time < t )
-		{
-			value--;
-			time++;
-			if( value < 1 )
-			{
-				lastCycleStartCount *= 2;
-				value = lastCycleStartCount;
-			}
-		}
-		return value;
+		return count - t + 1;
 	}
 
 

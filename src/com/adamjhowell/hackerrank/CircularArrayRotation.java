@@ -60,6 +60,7 @@ public class CircularArrayRotation
 	}
 
 
+	// This rotates "right" once.
 	private static int[] rightCircularRotation( int[] inArray )
 	{
 		int count = inArray.length;
@@ -83,10 +84,11 @@ public class CircularArrayRotation
 	{
 		String[] nkq = scanner.nextLine().split( " " );
 
+		// # of elements in the array.
 		int n = Integer.parseInt( nkq[0] );
-
+		// Rotation count.
 		int k = Integer.parseInt( nkq[1] );
-
+		// # of queries.
 		int q = Integer.parseInt( nkq[2] );
 
 		int[] a = new int[n];
@@ -100,27 +102,36 @@ public class CircularArrayRotation
 			a[i] = aItem;
 		}
 
+		int mod = k % n;
 		int[] queries = new int[q];
 
 		for( int i = 0; i < q; i++ )
 		{
 			int queriesItem = scanner.nextInt();
 			scanner.skip( "(\r\n|[\n\r\u2028\u2029\u0085])?" );
-			queries[i] = queriesItem;
-		}
-
-		int[] result = circularArrayRotation( a, k, queries );
-
-		for( int i = 0; i < result.length; i++ )
-		{
-			System.out.print( result[i] );
-
-			if( i != result.length - 1 )
+			if( queriesItem - mod >= 0 )
 			{
-				System.out.println();
+				System.out.println( a[queriesItem - mod] );
 			}
+			else
+			{
+				System.out.println( a[queriesItem - mod + a.length] );
+			}
+//			queries[i] = queriesItem;
 		}
-		System.out.println();
+
+//		int[] result = circularArrayRotation( a, k, queries );
+//
+//		for( int i = 0; i < result.length; i++ )
+//		{
+//			System.out.print( result[i] );
+//
+//			if( i != result.length - 1 )
+//			{
+//				System.out.println();
+//			}
+//		}
+//		System.out.println();
 
 		scanner.close();
 	}
